@@ -1,0 +1,12 @@
+/*g.link * {
+  opacity: 0.2;
+  cursor: pointer;
+}
+
+g.link text {
+  opacity: 0;
+}
+
+g.link:hover *{
+  opacity: 1;
+}*/
