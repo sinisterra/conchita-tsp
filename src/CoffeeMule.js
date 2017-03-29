@@ -2,18 +2,19 @@ import { sample, difference, fill, forEach, sampleSize, random, range, map, min,
 import _ from 'lodash'
 import 'lodash.combinations'
 
-const CITY_COUNT = 50
+const CITY_COUNT = 25
 const POPULATION_SIZE = 50
-const ELITISM_PERCENTAGE = 0.2
-const W = 960
-const H = 960
+const ELITISM_PERCENTAGE = 0.25
+const MUTATION_PERCENTAGE = 0.1
+const W = 1200 
+const H = 500
 
 const generateCities = (cities) => {
   const generateCoordinate = (max) => random(0, max)
 
   return map(range(cities), city => {
-    const x = 20 + (W * (city / cities))
-    const y = Math.abs(( H - 60 ) * Math.sin(30 * city))
+    const x =  (W * (city / cities)) + 20
+    const y = generateCoordinate(H - 20) + 20
     return ({
       city,
       x,
@@ -139,7 +140,7 @@ export const generateInitialPopulation = (size = POPULATION_SIZE) => {
 }
 
 const mutation = (chromosome) => {
-  if (Math.random() < 0.2) {
+  if (Math.random() < MUTATION_PERCENTAGE) {
 
     const onePoint = sampleSize(range(CITY_COUNT), sample(range(0, CITY_COUNT, 2)))
     let mutated = [...chromosome]

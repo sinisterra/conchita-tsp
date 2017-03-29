@@ -9,7 +9,7 @@ class App extends Component {
 
   state = {
     solutionIndex: 0,
-    generations: 30,
+    generations: 100,
     history: []
   }
 
@@ -62,28 +62,31 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <button onClick={ this._viewPrevSolution }>
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+         {/* <button onClick={ this._viewPrevSolution }>
             { `<< Previo` }
-          </button>
+          </button>*/}
+          <fieldset>
+            <legend>Población</legend>
           <span>Fitness: { fitness(route) }</span>
-          <span>GENERATION {this.state.history.length}</span>
-          <button onClick={ this._viewNextSolution }>
-            { `Siguiente >>` }
+          </fieldset>
+          <fieldset>
+            <legend>Número de generaciones</legend>
+          <button onClick={ this._runGeneration } style={{margin: '0px 32px'}}>
+            { `Próxima generación` }
           </button>
-          <button onClick={ this._runGeneration }>
-            { `NEXT GENERATION` }
-          </button>
-           <button onClick={ this._autoRun }>
-            { `AUTORUN` }
-          </button>
+
           <input type="number" value={this.state.generations} onChange={({target: {name, value}}) => {
             this.setState({[name]: value})
           }} name="generations"/>
+           <button onClick={ this._autoRun }>
+            { `Ejecutar` }
+          </button>
+          </fieldset>
         </div>
         <svg
-          width={ 960 }
-          height={ 960 }>
+          width={ 1200 }
+          height={ 500 }>
           { values(links).map(({d, label, m1, m2, ...dimensions}) => {
             
               const isInRoute = indexOf(displayedRoute, label) !== -1
